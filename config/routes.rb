@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+
+  mount Payola::Engine => '/payola', as: :payola
+  root 'products#index'
+  get 'products/show'
+
+  get "sign_up" => 'users#new', as: :sign_up
+  post "sign_up" => 'users#create', as: :users
+  get "sign_in" => 'sessions#new', as: :sign_in
+  post "sign_in" => 'sessions#create'
+  delete "sign_in" => 'sessions#destroy', as: :sign_out
+
+  get "cart" => 'carts#show', as: :shopping_cart
+  post "/carts/add/:product_id" => "carts#add", as: :add_to_cart
+  delete "/carts/remove/:product_id" => 'carts#remove', as: :remove_from_cart
+  get "confirmation/:sale_guid" => 'carts#confirmation', as: :confirmation
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

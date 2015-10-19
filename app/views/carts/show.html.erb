@@ -1,0 +1,46 @@
+
+<div class="page-header">
+  <h1>Your Product Cart <small>Your can always get more...</small></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Cancel</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cart.cart_items.each do |cart_item| %>
+      <tr id="product-<%= cart_item.product.id %>">
+        <td><%= cart_item.product.name %></td>
+        <td><%= number_to_currency cart_item.price %></td>
+        <td><div class="quantity"><%= cart_item.quantity %></div></td>
+        <td><%= link_to 'Remove', remove_from_cart_path(product_id: cart_item.product.id), method: :delete, class: "btn btn-danger" %></td>
+      </tr>
+
+    <% end %>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="text-right">Total:</td>
+        <td><strong><%= number_to_currency @cart.price_in_dollars %> </strong></td>
+      </tr>
+
+  </tbody>
+</table>
+
+<% if @cart.cart_items.any? %>
+ <%= render 'payola/transactions/checkout',
+             sellable: @cart,
+             button_text: "Get Your Product",
+             button_class: "btn btn-success",
+             name: "MyProductApp",
+             description: pluralize(@cart.cart_items.pluck(:quantity).sum, "product"),
+             product_image_path: @cart.cart_items.first.product.photo
+ %>
+<% end %>

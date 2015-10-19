@@ -1,0 +1,42 @@
+
+<div class="page-header">
+  <h1>Confirmed! Your products are on the way <small>Thanks for shopping with us...</small></h1>
+</div>
+
+<div class="well">
+  <dl>
+    <dt>Email</dt>
+    <dd><%= @cart.user.email %></dd>
+    <dt>Order ID</dt>
+    <dd><%= @sale.guid %></dd>
+    <dt>Order Date</dt>
+    <dd><%= @sale.created_at.strftime("%A, %B %e, %Y - %l:%M%p") %></dd>
+  </dl>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cart.cart_items.each do |cart_item| %>
+      <tr id="product-<%= cart_item.product.id %>">
+        <td><%= cart_item.product.name %></td>
+        <td><%= number_to_currency cart_item.price %></td>
+        <td><div class="quantity"><%= cart_item.quantity %></div></td>
+      </tr>
+
+    <% end %>
+
+      <tr>
+        <td></td>
+        <td class="text-right">Total:</td>
+        <td><strong><%= number_to_currency @cart.price_in_dollars %> </strong></td>
+      </tr>
+  </tbody>
+</table>
