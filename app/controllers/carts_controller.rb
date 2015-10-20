@@ -34,7 +34,7 @@ class CartsController < ApplicationController
     end
     @cart.price = @cart.cart_items.map{|ci| ci.price_in_cents * ci.quantity}.sum
     @cart.save
-    redirect_to shopping_cart_path
+    redirect_to root_path
   end
 
   def remove

@@ -5,9 +5,10 @@ Payola.configure do |config|
 
   # Example subscription:
   #
-  # config.subscribe 'payola.package.sale.finished' do |sale|
-  #   EmailSender.send_an_email(sale.email)
-  # end
+  config.subscribe 'payola.cart.sale.finished' do |sale|
+    cart = sale.product
+    cart.update(completed: true)
+  end
   #
   # In addition to any event that Stripe sends, you can subscribe
   # to the following special payola events:
