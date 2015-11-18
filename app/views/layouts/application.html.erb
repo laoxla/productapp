@@ -13,7 +13,7 @@
          <li><strong> <%= link_to 'MyProductApp', root_path %></strong> </li>
          <div class="greet">
            <% if user_signed_in? %>
-           <li><a href="/cart"> cart: </a> <%= @tot_quantity %> </li>
+           <li><a href="/cart"> <span class="glyphicon glyphicon-shopping-cart"></span></a> <%= @tot_quantity %> </li>
           <li>Hi <%= @current_user.first_name %></li>
           <li><%= link_to 'Sign Out', sign_out_path, method: :delete %></li>
 

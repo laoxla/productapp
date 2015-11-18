@@ -1,8 +1,7 @@
 Payola.configure do |config|
 
-   config.secret_key = 'sk_test_YX4xIKvnQQ3GXlEcg49uCBa6'
-   config.publishable_key = 'pk_test_G0XGFDEAx6HWBY3FikrmhRrj'
-
+   config.secret_key = ENV['stripe_api_key']
+   config.publishable_key = ENV['stripe_publishable_key']
   # Example subscription:
   #
   config.subscribe 'payola.cart.sale.finished' do |sale|
